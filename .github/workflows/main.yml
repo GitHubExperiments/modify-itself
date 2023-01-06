@@ -41,7 +41,9 @@ jobs:
         #git push https://.:${{github.token}}@github.com/${{github.repository}}
 
         # Используем PAT. У токена должна быть включена галочка "workflow"
-        git push https://${{secrets.GH_EXP_TOKEN}}@github.com/GitHubExperiments/modify-itself
+        #git push https://${{secrets.GH_EXP_TOKEN}}@github.com/GitHubExperiments/modify-itself
+
+        # А можно PR создать
+        gh pr create --title 'Заголовок PR' --body 'Описание PR'
 
         cd ..
-# Fri Jan  6 13:26:15 UTC 2023 
