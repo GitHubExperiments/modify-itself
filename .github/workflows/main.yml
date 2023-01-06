@@ -15,6 +15,10 @@ jobs:
 
     - name: Модифицируем себя
 
+      # Требуется для gh pr
+      env:
+        GH_TOKEN: ${{ github.token }}
+
       run: |
         git clone https://github.com/${{github.repository}} this_repo
 
