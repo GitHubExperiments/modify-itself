@@ -40,7 +40,7 @@ jobs:
         # error: failed to push some refs to 'https://github.com/GitHubExperiments/modify-itself'
         #git push https://.:${{github.token}}@github.com/${{github.repository}}
 
-        # Используем PAT
+        # Используем PAT. У токена должна быть включена галочка "workflow"
         git push https://${{secrets.GH_EXP_TOKEN}}@github.com/GitHubExperiments/modify-itself
 
         cd ..
