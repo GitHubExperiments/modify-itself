@@ -32,5 +32,15 @@ jobs:
         cd this_repo
         git add -A
         git commit -m "Update $NOW" || : # Создаём коммит и перехватываем ошибку, если в репозитории нет изменений
-        git push https://.:${{github.token}}@github.com/${{github.repository}}
+
+        # Такой способ использовать нельзя, так как workflow поменялся, а значит и токен поменялся.
+        # Будет ошибка
+        # To https://github.com/GitHubExperiments/modify-itself
+        #  ! [remote rejected] main -> main (refusing to allow a GitHub App to create or update workflow `.github/workflows/main.yml` without `workflows` permission)
+        # error: failed to push some refs to 'https://github.com/GitHubExperiments/modify-itself'
+        #git push https://.:${{github.token}}@github.com/${{github.repository}}
+
+        # Используем PAT
+        git push https://${{secrets.GH_EXP_TOKEN}}@github.com/GitHubExperiments/modify-itself
+
         cd ..
