@@ -1,0 +1,36 @@
+# Данный workflow демонстрирует изменение себя
+
+name: Модификация себя
+
+on:
+  workflow_dispatch:
+
+jobs:
+  RABOTA:
+    runs-on: ubuntu-latest
+
+    name: Демонстрация модификация себя
+
+    steps:
+
+    - name: Модифицируем себя
+
+      run: |
+        git clone https://github.com/${{github.repository}} this_repo
+
+        # Сохраняем текущее время в переменную NOW
+        NOW=$(date)
+
+        # Дописываем время в конец файла main.yml
+        echo "# $NOW " >> this_repo/.github/workflows/main.yml
+
+        # Автор коммита
+        git config --global user.email [бот]@users.noreply.github.com
+        git config --global user.name [Бот]
+
+        # Отправляем изменения в текущий репозиторий
+        cd this_repo
+        git add -A
+        git commit -m "Update $NOW" || : # Создаём коммит и перехватываем ошибку, если в репозитории нет изменений
+        git push https://.:${{github.token}}@github.com/${{github.repository}}
+        cd ..
